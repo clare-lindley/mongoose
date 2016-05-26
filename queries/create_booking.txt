@@ -1,0 +1,46 @@
+// CREATE Booking - this is an UPDATE to the user document - update BookingId AND UPDATE to Slot document
+        // the appropriate slot's booked property to 'true' (we will already know the slot id at this point)
+
+        var updatedUser = {};
+
+        async.series([
+
+          function updateUser(callback){
+
+            User.findOneAndUpdate({_id: '57474ad525f799cd11a8b7f3'}, {$set:{bookingId:'57474b27dd24f3d31199892c'}}, {new: true}, function(err, user){
+              if(err){
+                console.log(err);
+              }
+              else {
+                updatedUser = user;
+                callback();
+              }
+
+            });
+
+          },
+          function updateSlot(callback){
+
+            Slot.findOneAndUpdate({_id: '57474b27dd24f3d31199892c'}, {$set:{booked:true}}, {new: true}, function(err, slot){
+              if(err){
+                console.log(err);
+              }
+              else {
+                callback();
+              }
+
+            });
+
+            callback();
+
+          }],
+
+          function done(err){
+            if (err) {
+             // handle this
+            }
+            else {
+              // we did the update! Here's the user with the booking id set
+              reply(updatedUser).type('application/json');
+            }
+        });

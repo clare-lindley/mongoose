@@ -1,0 +1,12 @@
+
+        var slot = new Slot({
+          date: new Date()
+        });
+        slot.save(function(err, slot){
+          if(err){
+            // handle this - return status code and error code and log it
+          }
+          else{
+            reply(slot).type('application/json');
+          }
+        })

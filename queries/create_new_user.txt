@@ -1,0 +1,18 @@
+        var user = new User({
+          username: 'a_test_username',
+          password: '123456',
+          contact: {
+            "name": 'Testy McTest',
+            "phone": '01924 467567',
+            "email": 'testy@testmail.com'
+          }
+        });
+
+        user.save(function(err, user){
+          if(err){
+            // handle this - return status code and error code and log it
+          }
+          else{
+            reply(user).type('application/json');
+          }
+        })
