@@ -1,0 +1,12 @@
+        // DELETE Slot (only if it hasn't been booked)
+
+        Slot.findOneAndRemove({ _id: '57475edbac9da52713e7b5ec' }).and({booked: false}).exec(function(err){
+
+          if(err){
+
+          }
+          else {
+            reply('removed');
+          }
+
+        });
