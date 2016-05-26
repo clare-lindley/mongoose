@@ -1,0 +1,39 @@
+// 2. DELETE Booking - UPDATE User set BookingId to null and set appropriate slot's booked property back to false (we will already know the slot id at this point)
+
+        async.series([
+
+            function updateUser(callback){
+
+              User.findOneAndUpdate({bookingId: '57474b27dd24f3d31199892c'}, {$set:{bookingId:null}}, function(err){
+                if(err){
+                  console.log(err);
+                }
+                else {
+                  callback();
+                }
+
+              });
+
+            },
+            function updateSlot(callback){
+
+              Slot.findOneAndUpdate({_id: '57474b27dd24f3d31199892c'}, {$set:{booked:false}}, function(err){
+                if(err){
+                  console.log(err);
+                }
+                else {
+                  callback();
+                }
+
+              });
+
+            }],
+
+          function done(err){
+            if (err) {
+              // handle this
+            }
+            else {
+              reply('Booking Deleted');
+            }
+          });
